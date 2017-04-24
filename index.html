@@ -85,7 +85,11 @@ function main() {
 		id = Math.floor(Math.random() * 1000000);
 		localStorage.id = id;
 	}
-	ws = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port);
+        if (window.location.protocol == 'http:') {
+	   ws = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port);
+        }else{ 
+	   ws = new WebSocket("wss://" + window.location.hostname + ":" + window.location.port);
+        }
 	ws.onmessage = function(e) {
                 //statusBar.textContent += e.data;
 		if (e.data.charAt(0) == 'S') {
